@@ -4,18 +4,24 @@ from create_annotations import *
 
 # Label ids of the dataset
 category_ids = {
-    "BG": 0,
-    "building": 1
+    "road":0,
+    "lane": 1,
+    "undrivable": 2,
+    "movable": 3,
+    "my car": 4
 }
 
 # Define which colors match which categories in the images
 category_colors = {
-    "(0, 0, 0)": 0,
-    "(255, 255, 255)": 1
+    '(64, 32, 32)': 0, # road 
+    '(255, 0, 0)': 1, # lane markings
+    '(128, 128, 96)': 2, # undrivable
+    '(0, 255, 102)': 3, # movable 
+    '(204, 0, 255)': 4 # my car
 }
 
 # Define the ids that are a multiplolygon. In our case: wall, roof and sky
-multipolygon_ids = [0, 1]
+multipolygon_ids = [0, 1, 2, 3, 4]
 
 # Get "images" and "annotations" info 
 def images_annotations_info(maskpath):
@@ -33,8 +39,9 @@ def images_annotations_info(maskpath):
         # Open the image and (to be sure) we convert it to RGB
         mask_image_open = Image.open(mask_image).convert("RGB")
         w, h = mask_image_open.size
-        
+
         # "images" info 
+        print(original_file_name)
         image = create_image_annotation(original_file_name, w, h, image_id)
         images.append(image)
         
