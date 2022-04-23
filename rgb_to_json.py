@@ -86,7 +86,7 @@ if __name__ == "__main__":
     coco_format = get_coco_json_format()
     
     for keyword in ["train", "val"]: #, "test"]:
-        mask_path = f"{args.maskpath}/{keyword}_mask/"
+        mask_path = f"{args.maskpath}{keyword}_mask/"
         print(mask_path)
 
         # Create category section
