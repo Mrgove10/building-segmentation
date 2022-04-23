@@ -1,5 +1,5 @@
 import glob
-
+import argparse
 from create_annotations import *
 
 # Label ids of the dataset
@@ -76,12 +76,19 @@ def images_annotations_info(maskpath):
     return images, annotations, annotation_id
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='A test program.')
+    parser.add_argument("maskpath", help="Prints the supplied argument.")
+    args = parser.parse_args()
+
+    print(args.maskpath)
+
     # Get the standard COCO JSON format
     coco_format = get_coco_json_format()
     
-    for keyword in ["train", "val", "test"]:
-        mask_path = f"./dataset/png/{keyword}_labels/"
-        
+    for keyword in ["train", "val"]: #, "test"]:
+        mask_path = f"{args.maskpath}/{keyword}_mask/"
+        print(mask_path)
+
         # Create category section
         coco_format["categories"] = create_category_annotation(category_ids)
     
